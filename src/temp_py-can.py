@@ -95,6 +95,7 @@ print("temp_encoded_data: ", temp_encoded_data)
 
 temp_message = can.Message(arbitration_id=target_message.frame_id, extended_id=False, data=temp_encoded_data)
 
+
 ###
 def encode_target_message(dbc_file_path, target_signals):
     ### Input type: Dict
