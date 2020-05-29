@@ -4,7 +4,7 @@ import can
 import cantools
 from pprint import pprint
 
-##COMMIT
+##Test
 
 src_signal_name = 'CF_RCCA_WarnLh'
 signal_value = '0x1'
