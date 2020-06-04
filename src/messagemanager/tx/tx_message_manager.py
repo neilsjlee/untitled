@@ -1,37 +1,24 @@
 import time
 import re
-import can
-import cantools
+
 from pprint import pprint
 
-##Test
+
+class TxMessageManager:
+
+    print("TxMessageManager")
+
+
 
 src_signal_name = 'CF_RCCA_WarnLh'
 signal_value = '0x1'
 
-'''
-target_signal_dict = {
-    'CF_RCCA_WarnLh': '0x1'
-}
 
-
-for key in target_signal_dict.keys():
-    print("Signal Name: ", key, " / Signal Value: ", target_signal_dict[key])
-'''
-
-#db1_path = 'C:/Workstation/DB_CFG/qydb/20200318_QY_2020_PT_Chassis(2nd_Gen-2ch-C)_CLU_v1.7.dbc'
-db1_path = 'C:/Workstation/DB_CFG/SU2/v08_One_C-CAN_SU2r_b_20052020.dbc'
-db2_path = 'C:/Workstation/DB_CFG/qydb/20200218_QY_2020_Multi_v20.02.01.dbc'
-
-
-db1 = cantools.database.load_file(db1_path)
-db2 = cantools.database.load_file(db2_path)
 # example_message = db1.get_message_by_name('CGW1')
 # pprint(example_message.signals)
 
 
-bus1 = can.Bus(interface='vector', channel=0)
-bus2 = can.Bus(interface='vector', channel=1)
+
 
 
 
