@@ -1,31 +1,15 @@
 import time
-import re
+
 
 from pprint import pprint
 
 
 class TxMessageManager:
-
+    tx_message_list = []
     print("TxMessageManager")
 
 
-
-src_signal_name = 'CF_RCCA_WarnLh'
-signal_value = '0x1'
-
-
-# example_message = db1.get_message_by_name('CGW1')
-# pprint(example_message.signals)
-
-
-
-
-
-
-tx_message_list = []
-
-###############################################################################################
-class tx_message:
+class TxMessage:
     def __init__(self, tx_message_name, tx_message_cycle, tx_message_signal_dict={}):
         self.tx_message_name = tx_message_name
         self.tx_message_signal_dict = tx_message_signal_dict
@@ -35,31 +19,6 @@ class tx_message:
         self.tx_message_cycle = cycle_time
 
 
-###############################################################################################
-def find_message_name_by_signal_from_db(dbc_file_path, signal_name):
-    # Search input signal name from the DBC.
-    # * If there are multiple signals with the same signal name, the last signal in the DBC will be returned.
-    db_file = open(dbc_file_path, "r")
-    print(db_file)
-    message_line = ''
-    for line in db_file:
-        if line.startswith("BO_ "):
-            message_line = line
-            message_line_parse_ID = hex(int(message_line.split(" ")[1]))
-            message_line_parse_name = (message_line.split(" ")[2]).split(":")[0]
-        if line.startswith(" SG_"):
-            # CASE INSENSITIVE search using RE
-            if re.search(signal_name, line, re.IGNORECASE):
-                found_message_ID = message_line_parse_ID
-                found_message_name = message_line_parse_name
-                print('Message Info: ', found_message_ID, found_message_name)
-                print('Signal Info: ', line)
-
-    db_file.close
-
-    # return found_message_ID
-    return found_message_name
-###############################################################################################
 
 
 

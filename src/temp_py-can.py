@@ -79,6 +79,7 @@ def find_message_name_by_signal_from_db(dbc_file_path, signal_name):
 
 ###############################################################################################
 target_message = db1.get_message_by_name(find_message_name_by_signal_from_db(db1_path, src_signal_name))
+print("Cycle_time: ", db1.get_message_by_name(find_message_name_by_signal_from_db(db1_path, src_signal_name)).cycle_time)
 print("target_message: ", target_message)
 
 
