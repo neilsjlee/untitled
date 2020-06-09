@@ -1,0 +1,8 @@
+aenum==2.2.3
+bitstruct==8.10.0
+cantools==34.0.0
+diskcache==4.1.0
+python-can==3.3.2
+textparser==0.23.0
+windows-curses==2.1.0
+wrapt==1.12.1
