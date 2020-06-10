@@ -30,8 +30,7 @@ def print_loaded_dbc_list():
 
 
 def find_message_name_by_signal_from_db(signal_name):
-    # Search input signal name from the DBC.
-    # * If there are multiple signals with the same signal name, the last signal in the DBC will be returned.
+    # Search input signal name from the DBCs loaded.
     found_messages_list = []
 
     for each_dbc in dbc_manager.dbc_list:
