@@ -2,7 +2,7 @@ import time
 import re
 import can
 import cantools
-from pprint import pprint
+
 
 ##Test
 
@@ -19,7 +19,7 @@ for key in target_signal_dict.keys():
     print("Signal Name: ", key, " / Signal Value: ", target_signal_dict[key])
 '''
 
-#db1_path = 'C:/Workstation/DB_CFG/qydb/20200318_QY_2020_PT_Chassis(2nd_Gen-2ch-C)_CLU_v1.7.dbc'
+# db1_path = 'C:/Workstation/DB_CFG/qydb/20200318_QY_2020_PT_Chassis(2nd_Gen-2ch-C)_CLU_v1.7.dbc'
 db1_path = 'C:/Workstation/DB_CFG/SU2/v08_One_C-CAN_SU2r_b_20052020.dbc'
 db2_path = 'C:/Workstation/DB_CFG/qydb/20200218_QY_2020_Multi_v20.02.01.dbc'
 
