@@ -6,7 +6,7 @@ import cantools
 
 ##Test
 
-src_signal_name = 'CF_RCCA_WarnLh'
+src_signal_name = 'TREAD_W_LAMP'
 signal_value = '0x1'
 
 '''
