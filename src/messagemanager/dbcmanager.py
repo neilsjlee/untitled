@@ -17,36 +17,49 @@ class DbcManager:
             print("Loaded DBC Path:", each_dbc.path, "\tX\tChannel:", each_dbc.channel)
 
     def find_message_by_signal_from_db(self, signal_name_):
-        # Search input signal name from the DBCs loaded.
+        # INPUT:    signal name
+        # OUTPUT:   tuple([0]dbc path, [1]channel, [2]message name)
         found_messages_list = []
 
         for each_dbc in self.dbc_list:
             for each_message in each_dbc.loaded_dbc.messages:
                 for each_signal in each_message.signals:
                     if re.search(each_signal.name, signal_name_, re.IGNORECASE):
-                        found_messages_list.append(each_message)
+                        dbc_message_tuple = (each_dbc.path, each_dbc.channel, each_message.name)
+                        found_messages_list.append(dbc_message_tuple)
 
         return found_messages_list
 
-    def get_message_attributes(self, message_name_):
-        # DBC
-        # Channel
-        # Message ID
-        # Message Name
-        # Message Cycle Time
-        # Signals Name
-        # Signals Initial value
-        #
-        print("get_message_attributes")
+    def get_signals_and_default_values(self, db_path_, message_name_):
+        # INPUT:    dbc path, message name
+        # OUTPUT:   List[tuple(signal name, signal init value, signal minimum value, signal maximum value)]
 
-    def get_signals_and_default_values(self, message_):
+        loaded_dbc = self.find_loaded_dbc(db_path_)
         signal_list = []
-        for each_signal in message_.signals:
+        for each_signal in (loaded_dbc.get_message_by_name(message_name_)).signals:
             signal_info_tuple = (each_signal.name, each_signal.initial, each_signal.minimum, each_signal.maximum)
-            print("\t", each_signal.name, ", ", each_signal.initial, ", ", each_signal.minimum, ", ", each_signal.maximum)
             signal_list.append(signal_info_tuple)
 
         return signal_list
+
+    def get_message_attributes(self, db_path_, message_name_):
+        # Message ID
+        # Message Name
+        # Message Cycle Time
+        loaded_dbc = self.find_loaded_dbc(db_path_)
+
+        message_id = loaded_dbc.get_message_by_name(message_name_).frame_id
+        cycle_time = loaded_dbc.get_message_by_name(message_name_).cycle_time
+
+        return message_id, cycle_time
+
+    def find_loaded_dbc(self, db_path_):
+        # INPUT:    db path
+        # OUTPUT:   loaded dbc
+        for each_dbc in self.dbc_list:
+            if each_dbc.path == db_path_:
+                found_loaded_dbc = each_dbc.loaded_dbc
+        return found_loaded_dbc
 
 
 class Dbc:
