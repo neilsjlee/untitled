@@ -17,4 +17,4 @@ for each_key in dbc_from_ui:
 dbc_manager.print_loaded_dbc_list()
 
 # print(find_message_name_by_signal_from_db("ABS_W_LAMP"))
-tx_message_ready("ABS_W_LAMP", 1)
+tx_message_ready_by_signal("ABS_W_LAMP", 1)
