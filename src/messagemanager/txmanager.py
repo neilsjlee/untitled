@@ -13,8 +13,8 @@ class TxMessageManager:
             if (each_tx_message.tx_db_path == dbc_path_) & (each_tx_message.tx_message_name == message_name_):
                 print("The same message is already ready in TxMessageManager")
 
-    def new_tx_message(self, tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_):
-        temp_tx_message = TxMessage(tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_)
+    def new_tx_message(self, tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_, tx_signals_):
+        temp_tx_message = TxMessage(tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_, tx_signals_)
         self.tx_message_list.append(temp_tx_message)
 
 
@@ -25,12 +25,13 @@ class TxMessage:
     encoded_signals = ""
     send_task = ""
 
-    def __init__(self, tx_db_path, tx_channel, tx_message_name, tx_message_id, tx_message_cycle):
+    def __init__(self, tx_db_path, tx_channel, tx_message_name, tx_message_id, tx_message_cycle, tx_signals):
         self.tx_db_path = tx_db_path
         self.tx_channel = tx_channel
         self.tx_message_name = tx_message_name
         self.tx_message_id = tx_message_id
         self.tx_message_cycle = tx_message_cycle
+        self.tx_signals = tx_signals
 
     def start_send_periodically(self):
         if self.tx_channel == 0:
