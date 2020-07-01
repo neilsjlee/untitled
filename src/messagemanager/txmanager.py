@@ -13,6 +13,10 @@ class TxMessageManager:
             if (each_tx_message.tx_db_path == dbc_path_) & (each_tx_message.tx_message_name == message_name_):
                 print("The same message is already ready in TxMessageManager")
 
+    def new_tx_message(self, tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_):
+        temp_tx_message = TxMessage(tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_)
+        self.tx_message_list.append(temp_tx_message)
+
 
 class TxMessage:
     # db_path, channel, message_name, message_id, message_cycle_time
