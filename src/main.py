@@ -8,13 +8,9 @@ dbc_from_ui = {
     "C:/Users/nehru/Desktop/20181030_DN8_MCAN_2019_18-10-04.dbc": 1
 }
 
-
-# load_dbc(db1_path, 0)
-
 for each_key in dbc_from_ui:
     load_dbc(each_key, dbc_from_ui[each_key])
 
 dbc_manager.print_loaded_dbc_list()
 
-# print(find_message_name_by_signal_from_db("ABS_W_LAMP"))
 tx_message_ready_by_signal("ABS_W_LAMP", 1)

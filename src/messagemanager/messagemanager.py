@@ -2,9 +2,8 @@ from .dbcmanager import *
 from .hwsetup import *
 from .txmanager import *
 
-
-# set_bus(0, bus1)
-# set_bus(1, bus2)
+set_bus(0, bus1)
+set_bus(1, bus2)
 
 
 def load_dbc(dbc_path_, channel_):
@@ -32,18 +31,24 @@ def tx_message_ready_by_signal(signal_name_, signal_value_):
         signal_name_initial_min_max_list = dbc_manager.get_signals_and_default_values(db_path, message_name)
         # signal_name_initial_min_max: [0] signal_name, [1] initialValue, [2] min, [3] max
 
-        tx_message_manager.new_tx_message(db_path, channel, message_name, message_id, message_cycle_time, signal_name_initial_min_max_list)
-
-        signal_name_value = {}
-        # dict
-        for each_signal_info in signal_name_initial_min_max_list:
-            # signal_name_value[each_signal_info[0]] = int(each_signal_info[1], 16)
-            signal_name_value[each_signal_info[0]] = each_signal_info[1]
-
+        tx_message_manager.new_tx_message(db_path,
+                                          channel,
+                                          message_name,
+                                          message_id,
+                                          message_cycle_time,
+                                          signal_name_initial_min_max_list
+                                          )
+        found_message = tx_message_manager.find_tx_message(db_path, channel, message_name)
         # signal_name_value[signal_name_] = int(signal_value_, 16)
-        signal_name_value[signal_name_] = signal_value_
+        found_message.tx_message_signal_dict[signal_name_] = signal_value_
 
-    print("END")
+
+def tx_message_update_signal_values(tx_db_path_, tx_channel_, tx_db_message_name_, tx_signal_name_, tx_signal_value_):
+    print("a")
+
+
+def tx_message_start_send():
+    tx_message_manager.start_send_all_tx_messages()
 
 
 def XXXXX_tx_message_ready_by_signal(signal_name_, signal_value_):
@@ -83,4 +88,3 @@ def XXXXX_tx_message_ready_by_signal(signal_name_, signal_value_):
             print("\t", each_signal, ":", signal_name_value[each_signal])
 
     print("END")
-
