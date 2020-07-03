@@ -9,8 +9,8 @@ dbc_from_ui = {
 }
 
 for each_key in dbc_from_ui:
-    load_dbc(each_key, dbc_from_ui[each_key])
+    message_manager.load_dbc(each_key, dbc_from_ui[each_key])
 
-dbc_manager.print_loaded_dbc_list()
+message_manager.print_loaded_dbc_list()
 
 tx_message_ready_by_signal("ABS_W_LAMP", 1)

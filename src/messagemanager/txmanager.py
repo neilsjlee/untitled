@@ -16,6 +16,7 @@ class TxMessageManager:
     def new_tx_message(self, tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_, tx_signals_):
         temp_tx_message = TxMessage(tx_db_path_, tx_channel_, tx_message_name_, tx_message_id_, tx_message_cycle_, tx_signals_)
         self.tx_message_list.append(temp_tx_message)
+        return temp_tx_message
 
     def find_tx_message(self, tx_db_path_, tx_channel_, tx_db_message_name_):
         for each_tx_message in self.tx_message_list:
@@ -59,6 +60,7 @@ class TxMessage:
 
     def encode_message(self):
         print("TBD")
+
 
 tx_message_manager = TxMessageManager()
 
