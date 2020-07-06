@@ -18,4 +18,4 @@ ready_messages = message_manager.tx_message_ready_by_signal("ABS_W_LAMP", 1)
 for each in ready_messages:
     print(each.tx_message.tx_message_name, each.tx_message.tx_message_id, each.tx_message.tx_signals)
     print("\t", each.tx_message.tx_message_signal_dict)
-    each.tx_message.start_send_periodically()
+    # each.tx_message.start_send_periodically()

@@ -48,9 +48,13 @@ class TxMessage:
         self.tx_signals_init()
 
     def tx_signals_init(self):
+        self.tx_message_signal_dict = {}
         for each_signal_info in self.tx_signals:
             # signal_name_value[each_signal_info[0]] = int(each_signal_info[1], 16)
-            self.tx_message_signal_dict[each_signal_info[0]] = each_signal_info[1]
+            if type(each_signal_info[1]) != 'int':
+                self.tx_message_signal_dict[each_signal_info[0]] = 0
+            else:
+                self.tx_message_signal_dict[each_signal_info[0]] = each_signal_info[1]
 
     def start_send_periodically(self):
         if self.tx_channel == 0:

@@ -98,6 +98,7 @@ class DbcMessageTxMessage:
         self.tx_message = tx_message
 
     def encode_tx_signals(self):
+        print(self.tx_message.tx_message_signal_dict)
         encoded = self.dbc_message.encode(self.tx_message.tx_message_signal_dict)
         self.tx_message.update_encoded_signals(encoded)
 

@@ -25,22 +25,8 @@ class DbcManager:
         for each_dbc in self.dbc_list:
             for each_message in each_dbc.loaded_dbc.messages:
                 for each_signal in each_message.signals:
-                    if re.search(each_signal.name, signal_name_, re.IGNORECASE):
+                    if re.search(signal_name_, each_signal.name, re.IGNORECASE):
                         dbc_message_tuple = (each_dbc, each_message)
-                        found_messages_list.append(dbc_message_tuple)
-
-        return found_messages_list
-
-    def find_message_by_signal_from_db(self, signal_name_):
-        # INPUT:    signal name
-        # OUTPUT:   tuple([0]dbc path, [1]channel, [2]message name)
-        found_messages_list = []
-
-        for each_dbc in self.dbc_list:
-            for each_message in each_dbc.loaded_dbc.messages:
-                for each_signal in each_message.signals:
-                    if re.search(each_signal.name, signal_name_, re.IGNORECASE):
-                        dbc_message_tuple = (each_dbc.path, each_dbc.channel, each_message.name)
                         found_messages_list.append(dbc_message_tuple)
 
         return found_messages_list
