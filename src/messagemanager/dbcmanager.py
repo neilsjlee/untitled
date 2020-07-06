@@ -26,7 +26,7 @@ class DbcManager:
             for each_message in each_dbc.loaded_dbc.messages:
                 for each_signal in each_message.signals:
                     if re.search(each_signal.name, signal_name_, re.IGNORECASE):
-                        dbc_message_tuple = (each_dbc, each_message.name)
+                        dbc_message_tuple = (each_dbc, each_message)
                         found_messages_list.append(dbc_message_tuple)
 
         return found_messages_list
@@ -45,7 +45,7 @@ class DbcManager:
 
         return found_messages_list
 
-    def get_signals_and_default_values(self, db_path_, message_name_):
+    def get_signals_name_initial_min_max_values(self, db_path_, message_name_):
         # INPUT:    dbc path, message name
         # OUTPUT:   List[tuple(signal name, signal init value, signal minimum value, signal maximum value)]
 

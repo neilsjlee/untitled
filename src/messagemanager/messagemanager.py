@@ -1,9 +1,5 @@
 from .dbcmanager import *
-from .hwsetup import *
 from .txmanager import *
-
-set_bus(0, bus1)
-set_bus(1, bus2)
 
 
 class MessageManager:
@@ -15,7 +11,7 @@ class MessageManager:
     def print_loaded_dbc_list(self):
         dbc_manager.print_loaded_dbc_list()
 
-    def temp_tx_message_ready_by_signal(self, signal_name_, signal_value_):
+    def tx_message_ready_by_signal(self, signal_name_, signal_value_):
         # INPUT:    signal name, signal value
         dbc_m_tx_m_list = []
 
@@ -27,13 +23,19 @@ class MessageManager:
                 else:
                     dbc = each_dbc_and_message[0]
                     dbc_message = each_dbc_and_message[1]
+                    signal_name_initial_min_max_list = dbc_manager.get_signals_name_initial_min_max_values(dbc.path, dbc_message.name)
+
                     new_tx_message = tx_message_manager.new_tx_message(dbc.path,
                                                                        dbc.channel,
                                                                        dbc_message.name,
                                                                        dbc_message.frame_id,
-                                                                       dbc_message.cycle_time
+                                                                       dbc_message.cycle_time,
+                                                                       signal_name_initial_min_max_list
                                                                        )
-                    dbc_m_tx_m_list.append(self.new_dbc_and_tx_message(dbc, dbc_message, new_tx_message))
+                    new_dbc_message_tx_message = self.new_dbc_and_tx_message(dbc, dbc_message, new_tx_message)
+                    dbc_m_tx_m_list.append(new_dbc_message_tx_message)
+
+                    new_dbc_message_tx_message.set_signal_value(signal_name_, signal_value_)
 
         return dbc_m_tx_m_list
 
@@ -55,6 +57,7 @@ class MessageManager:
         return result
 
 
+'''
 def tx_message_ready_by_signal(signal_name_, signal_value_):
     # INPUT:    signal name, signal value
     # OUTPUT:   db_path, channel, message_name, message_id, message_cycle_time,
@@ -69,7 +72,7 @@ def tx_message_ready_by_signal(signal_name_, signal_value_):
         message_id = hex(message_attributes_tuple[0])
         message_cycle_time = message_attributes_tuple[1]
 
-        signal_name_initial_min_max_list = dbc_manager.get_signals_and_default_values(db_path, message_name)
+        signal_name_initial_min_max_list = dbc_manager.get_signals_name_initial_min_max_values(db_path, message_name)
         # signal_name_initial_min_max: [0] signal_name, [1] initialValue, [2] min, [3] max
 
         new_tx_message = tx_message_manager.new_tx_message(db_path,
@@ -82,8 +85,7 @@ def tx_message_ready_by_signal(signal_name_, signal_value_):
 
         # signal_name_value[signal_name_] = int(signal_value_, 16)
         new_tx_message.tx_message_signal_dict[signal_name_] = signal_value_
-
-
+'''
 
 message_manager = MessageManager()
 
@@ -95,4 +97,10 @@ class DbcMessageTxMessage:
         self.dbc_message = dbc_message
         self.tx_message = tx_message
 
+    def encode_tx_signals(self):
+        encoded = self.dbc_message.encode(self.tx_message.tx_message_signal_dict)
+        self.tx_message.update_encoded_signals(encoded)
 
+    def set_signal_value(self, signal_name_, signal_value_):
+        self.tx_message.tx_message_signal_dict[signal_name_] = signal_value_
+        self.encode_tx_signals()

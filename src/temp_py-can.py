@@ -93,7 +93,7 @@ message_dict[src_signal_name] = int(signal_value, 16)
 temp_encoded_data = target_message.encode(message_dict)
 print("temp_encoded_data: ", temp_encoded_data)
 
-
+print("frame_id:", target_message.frame_id)
 temp_message = can.Message(arbitration_id=target_message.frame_id, extended_id=False, data=temp_encoded_data)
 
 
