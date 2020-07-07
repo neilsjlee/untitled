@@ -33,10 +33,6 @@ tx_message_manager = TxMessageManager()
 class TxMessage:
     # db_path, channel, message_name, message_id, message_cycle_time
     # signal_dict, encoded_signals, send_task
-    tx_message_signal_dict = {}
-    encoded_signals = ""
-    encoded_message = ""
-    send_task = ""
 
     def __init__(self, tx_db_path, tx_channel, tx_message_name, tx_message_id, tx_message_cycle, tx_signals):
         self.tx_db_path = tx_db_path
@@ -45,10 +41,13 @@ class TxMessage:
         self.tx_message_id = tx_message_id
         self.tx_message_cycle = tx_message_cycle
         self.tx_signals = tx_signals
+        self.encoded_signals = ""
+        self.encoded_message = ""
+        self.send_task = ""
+        self.tx_message_signal_dict = {}
         self.tx_signals_init()
 
     def tx_signals_init(self):
-        self.tx_message_signal_dict = {}
         for each_signal_info in self.tx_signals:
             # signal_name_value[each_signal_info[0]] = int(each_signal_info[1], 16)
             if type(each_signal_info[1]) != 'int':

@@ -7,15 +7,23 @@ dbc_from_ui = {
     "C:/Users/nehru/Desktop/20181030_DN8_MCAN_2019_18-10-04.dbc": 1
 }
 
+tx_signals_from_ui = {
+    "ABS_W_LAMP": 1,
+    "TCS_LAMP": 1
+}
+
 for each_key in dbc_from_ui:
     message_manager.load_dbc(each_key, dbc_from_ui[each_key])
 
 message_manager.print_loaded_dbc_list()
 
 ready_messages = []
-ready_messages = message_manager.tx_message_ready_by_signal("ABS_W_LAMP", 1)
+ready_messages = message_manager.tx_message_ready_by_signal(tx_signals_from_ui)
+# ready_messages2 = []
+# ready_messages2 = message_manager.tx_message_ready_by_signal("TCS_LAMP", 1)
 
 for each in ready_messages:
     print(each.tx_message.tx_message_name, each.tx_message.tx_message_id, each.tx_message.tx_signals)
     print("\t", each.tx_message.tx_message_signal_dict)
-    # each.tx_message.start_send_periodically()
+
+print("END")
