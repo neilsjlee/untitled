@@ -9,7 +9,8 @@ dbc_from_ui = {
 
 tx_signals_from_ui = {
     "ABS_W_LAMP": 1,
-    "TCS_LAMP": 1
+    "TCS_LAMP": 1,
+    "CF_Gway_AutoLightValue": 1
 }
 
 for each_key in dbc_from_ui:
@@ -19,8 +20,6 @@ message_manager.print_loaded_dbc_list()
 
 ready_messages = []
 ready_messages = message_manager.tx_message_ready_by_signal(tx_signals_from_ui)
-# ready_messages2 = []
-# ready_messages2 = message_manager.tx_message_ready_by_signal("TCS_LAMP", 1)
 
 for each in ready_messages:
     print(each.tx_message.tx_message_name, each.tx_message.tx_message_id, each.tx_message.tx_signals)

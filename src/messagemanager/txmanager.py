@@ -50,7 +50,7 @@ class TxMessage:
     def tx_signals_init(self):
         for each_signal_info in self.tx_signals:
             # signal_name_value[each_signal_info[0]] = int(each_signal_info[1], 16)
-            if type(each_signal_info[1]) != 'int':
+            if type(each_signal_info[1]) != int:
                 self.tx_message_signal_dict[each_signal_info[0]] = 0
             else:
                 self.tx_message_signal_dict[each_signal_info[0]] = each_signal_info[1]
