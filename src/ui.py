@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 root_window = tk.Tk()
 root_window.wm_title("VEK Simple CAN Tool")
 root_window.geometry("640x400+100+100")
@@ -15,7 +16,13 @@ root_window.pack_propagate(0)
 
 
 def main_loop():
+
+
+
+
     root_window.after(1000, main_loop)
 
 
 root_window.after(1000, main_loop)
+
+root_window.mainloop()

@@ -14,6 +14,7 @@ tx_signals_from_ui = {
     "CF_Gway_AutoLightValue": 1
 }
 
+
 for each_key in dbc_from_ui:
     message_manager.load_dbc(each_key, dbc_from_ui[each_key])
 
@@ -26,7 +27,4 @@ for each in ready_messages:
     print(each.tx_message.tx_message_name, each.tx_message.tx_message_id, each.tx_message.tx_signals)
     print("\t", each.tx_message.tx_message_signal_dict)
 
-print("END")
 
-
-ui.root_window.mainloop()
