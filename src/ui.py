@@ -1,5 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
+import threading
+import queue
+
+
+class UI():
+    def __init__(self):
+        print("PLEASE UPDATE")
 
 
 root_window = tk.Tk()
@@ -24,5 +31,8 @@ def main_loop():
 
 
 root_window.after(1000, main_loop)
+
+
+
 
 root_window.mainloop()

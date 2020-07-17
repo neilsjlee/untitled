@@ -1,5 +1,6 @@
 from messagemanager import *
 import ui
+import threading
 
 dbc_from_ui = {
     "C:/Workstation/DB_CFG/SU2/v08_One_C-CAN_SU2r_b_20052020.dbc": 0,
@@ -28,3 +29,6 @@ for each in ready_messages:
     print("\t", each.tx_message.tx_message_signal_dict)
 
 
+class MainThread(threading.Thread):
+    def run(self):
+        print("thread start")
