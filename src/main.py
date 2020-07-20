@@ -31,8 +31,8 @@ for each in ready_messages:
 
 class MainThread(threading.Thread):
     def run(self):
+        print("main_thread_running")
         while True:
-            print("main_thread_running")
             try:
                 data = ui.ui.q.get()
                 if data == "test":
@@ -42,5 +42,8 @@ class MainThread(threading.Thread):
 
 
 main_thread = MainThread()
-main_thread.start()
+MainThread().start()
+
+
+ui.root_window.mainloop()
 

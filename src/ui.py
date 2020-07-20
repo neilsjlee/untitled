@@ -16,7 +16,6 @@ def testcommand():
 
 
 ui = UI()
-ui.q.put("test")
 
 ###
 root_window = tk.Tk()
@@ -42,20 +41,3 @@ btn_test.grid(row=0, column=0)
 root_window.pack_propagate(0)
 
 
-
-
-'''
-def main_loop():
-
-
-
-
-    root_window.after(1000, main_loop)
-
-
-root_window.after(1000, main_loop)
-'''
-
-
-
-root_window.mainloop()
