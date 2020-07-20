@@ -6,9 +6,19 @@ import queue
 
 class UI():
     def __init__(self):
-        print("PLEASE UPDATE")
+        self.q = queue.Queue()
 
 
+
+def testcommand():
+    ui.q.put("test")
+    print("testcommand")
+
+
+ui = UI()
+ui.q.put("test")
+
+###
 root_window = tk.Tk()
 root_window.wm_title("VEK Simple CAN Tool")
 root_window.geometry("640x400+100+100")
@@ -16,12 +26,25 @@ root_window.geometry("640x400+100+100")
 root_window.resizable(False, False)
 # resizable(Height, Width)
 
-device_number_label = tk.Label(root_window, text="Connected HU: ", width=25)
-device_number_label.grid(row=0, column=0)
+notebook = ttk.Notebook(root_window)
+notebook_p1 = tk.Frame(notebook)
+notebook.add(notebook_p1, text='Page 1')
+notebook.grid(row=1, rowspan=4, column=0, columnspan=4, sticky='nsew')
 
+p1_f1 = tk.Frame(notebook_p1)
+p1_f1.grid(row=0, column=0, sticky='nsew')
+
+btn_test = tk.Button(p1_f1, text="TEST", command=testcommand)
+btn_test.grid(row=0, column=0)
+
+
+###
 root_window.pack_propagate(0)
 
 
+
+
+'''
 def main_loop():
 
 
@@ -31,7 +54,7 @@ def main_loop():
 
 
 root_window.after(1000, main_loop)
-
+'''
 
 
 
