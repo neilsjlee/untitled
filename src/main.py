@@ -1,6 +1,7 @@
 from messagemanager import *
+from ui import *
 import threading
-import ui
+
 
 dbc_from_ui = {
     "C:/Workstation/DB_CFG/SU2/v08_One_C-CAN_SU2r_b_20052020.dbc": 0,
@@ -34,9 +35,11 @@ class MainThread(threading.Thread):
         print("main_thread_running")
         while True:
             try:
-                data = ui.ui.q.get()
+                data = ui.q.get()
                 if data == "test":
-                    print("TEST")
+                    print("MainThread: TEST")
+                if data == "load_dbc":
+                    print("MainThread: LOAD DBC")
             except:
                 count = 0
 
@@ -44,6 +47,5 @@ class MainThread(threading.Thread):
 main_thread = MainThread()
 MainThread().start()
 
-
-ui.root_window.mainloop()
+root_window.mainloop()
 
