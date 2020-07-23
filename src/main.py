@@ -2,7 +2,7 @@ from messagemanager import *
 from ui import *
 import threading
 
-
+'''
 dbc_from_ui = {
     "C:/Workstation/DB_CFG/SU2/v08_One_C-CAN_SU2r_b_20052020.dbc": 0,
     "C:/Workstation/DB_CFG/SU2/20200522_SU2r_2021_Multi_CLU_v0.3.dbc": 1,
@@ -28,6 +28,7 @@ ready_messages = message_manager.tx_message_ready_by_signal(tx_signals_from_ui)
 for each in ready_messages:
     print(each.tx_message.tx_message_name, each.tx_message.tx_message_id, each.tx_message.tx_signals)
     print("\t", each.tx_message.tx_message_signal_dict)
+'''
 
 
 class MainThread(threading.Thread):
@@ -40,6 +41,9 @@ class MainThread(threading.Thread):
                     print("MainThread: TEST")
                 if data == "load_dbc":
                     print("MainThread: LOAD DBC")
+                    for each_key in ui.source_dbc:
+                        message_manager.load_dbc(each_key, ui.source_dbc[each_key])
+                    message_manager.print_loaded_dbc_list()
             except:
                 count = 0
 
