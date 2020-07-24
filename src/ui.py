@@ -7,21 +7,23 @@ import queue
 class UI():
     def __init__(self):
         self.q = queue.Queue()
-        self.source_dbc = {}
-        self.number_of_signals_ready = 0;
+        self.source_dbc = []
+        self.number_of_signals_ready = 0
 
 
 def open_dbc(channel):
     if channel == 0:
         file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title="Choose DBC for Channel 1", filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
         for each in file:
-            ui.source_dbc[each] = 0
+            temp = {each, 0}
+            ui.source_dbc.append(temp)
             list_dbc_channel_1.insert(list_dbc_channel_1.size(), each)
 
     if channel == 1:
         file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title="Choose DBC for Channel 2", filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
         for each in file:
-            ui.source_dbc[each] = 1
+            temp = {each, 1}
+            ui.source_dbc.append(temp)
             list_dbc_channel_2.insert(list_dbc_channel_2.size(), each)
     print(ui.source_dbc)
 
@@ -34,11 +36,10 @@ def delete_dbc(channel):
         else:
             delete_targets1 = []
             for each in current_selected_chan1_dbc:
-                delete_targets1.append(list_dbc_channel_2.get(each))
+                delete_targets1.append(list_dbc_channel_1.get(each))
             for each in delete_targets1:
                 if ui.source_dbc[each] == 0:
                     del ui.source_dbc[each]
-                del ui.source_dbc[list_dbc_channel_1.get(each)]
             for each in current_selected_chan1_dbc[::-1]:
                 list_dbc_channel_1.delete(each)
 
@@ -88,7 +89,7 @@ notebook.add(notebook_p1, text='Page 1')
 notebook.grid(row=1, rowspan=4, column=0, columnspan=4, sticky='nsew')
 
 # Page 1 - Frame 1 (p1_f1)
-p1_f1 = tk.LabelFrame(notebook_p1, text='DBC Setting', bd=5, padx=5, pady=5, width=100)
+p1_f1 = tk.LabelFrame(notebook_p1, text='DBC Setting', bg='#6495ed', bd=5, padx=5, pady=5, width=100)
 p1_f1.grid(row=0, column=0, sticky='nsew')
 
 btn_dbc_channel_1 = tk.Button(p1_f1, text="Open CCAN DBCs", width=15, command=lambda: open_dbc(0))
