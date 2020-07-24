@@ -15,14 +15,14 @@ def open_dbc(channel):
     if channel == 0:
         file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title="Choose DBC for Channel 1", filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
         for each in file:
-            temp = {each, 0}
+            temp = {each: 0}
             ui.source_dbc.append(temp)
             list_dbc_channel_1.insert(list_dbc_channel_1.size(), each)
 
     if channel == 1:
         file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title="Choose DBC for Channel 2", filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
         for each in file:
-            temp = {each, 1}
+            temp = {each: 1}
             ui.source_dbc.append(temp)
             list_dbc_channel_2.insert(list_dbc_channel_2.size(), each)
     print(ui.source_dbc)
@@ -38,8 +38,9 @@ def delete_dbc(channel):
             for each in current_selected_chan1_dbc:
                 delete_targets1.append(list_dbc_channel_1.get(each))
             for each in delete_targets1:
-                if ui.source_dbc[each] == 0:
-                    del ui.source_dbc[each]
+                for each_list_item in ui.source_dbc:
+                    if each_list_item[each] == 0:
+                        ui.source_dbc.remove(each_list_item)
             for each in current_selected_chan1_dbc[::-1]:
                 list_dbc_channel_1.delete(each)
 
@@ -53,7 +54,9 @@ def delete_dbc(channel):
                 delete_targets2.append(list_dbc_channel_2.get(each))
             for each in delete_targets2:
                 if ui.source_dbc[each] == 1:
-                    del ui.source_dbc[each]
+                    for each_list_item in ui.source_dbc:
+                        if each_list_item[each] == 0:
+                            ui.source_dbc.remove(each_list_item)
             for each in current_selected_chan2_dbc[::-1]:
                 list_dbc_channel_2.delete(each)
 
