@@ -8,6 +8,9 @@ class MessageManager:
     def load_dbc(self, dbc_path_, channel_):
         dbc_manager.load_dbc(dbc_path_, channel_)
 
+    def unload_dbc(self):
+        dbc_manager.unload_dbc()
+
     def print_loaded_dbc_list(self):
         dbc_manager.print_loaded_dbc_list()
 

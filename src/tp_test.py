@@ -5,7 +5,7 @@ import can
 bus1 = can.Bus(interface='vector', channel=0)
 bus2 = can.Bus(interface='vector', channel=1)
 
-'''
+
 ##################
 # AV BT TP
 tp_task1 = bus2.send_periodic(can.Message(arbitration_id=0x122, extended_id=False, data=[0x08, 0x40, 0x00, 0x00, 0x00, 0x00, 0x02, 0x13]), 0.2)
@@ -28,7 +28,6 @@ time.sleep(3)
 bus2.send(can.Message(arbitration_id=0x4F6, extended_id=False, data=[0x02, 0x00, 0x00, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA]))
 ### Clear TP
 time.sleep(5)
-'''
 
 '''
 ##################

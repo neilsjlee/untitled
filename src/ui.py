@@ -39,8 +39,9 @@ def delete_dbc(channel):
                 delete_targets1.append(list_dbc_channel_1.get(each))
             for each in delete_targets1:
                 for each_list_item in ui.source_dbc:
-                    if each_list_item[each] == 0:
-                        ui.source_dbc.remove(each_list_item)
+                    if each in each_list_item.keys():
+                        if each_list_item[each] == 0:
+                            ui.source_dbc.remove(each_list_item)
             for each in current_selected_chan1_dbc[::-1]:
                 list_dbc_channel_1.delete(each)
 
@@ -55,8 +56,9 @@ def delete_dbc(channel):
             for each in delete_targets2:
                 if ui.source_dbc[each] == 1:
                     for each_list_item in ui.source_dbc:
-                        if each_list_item[each] == 0:
-                            ui.source_dbc.remove(each_list_item)
+                        if each in each_list_item.keys():
+                            if each_list_item[each] == 0:
+                                ui.source_dbc.remove(each_list_item)
             for each in current_selected_chan2_dbc[::-1]:
                 list_dbc_channel_2.delete(each)
 

@@ -12,6 +12,10 @@ class DbcManager:
         except:
             print("Load DBC Error: Please check DBC path")
 
+    def unload_dbc(self):
+        if len(self.dbc_list) > 0:
+            del self.dbc_list[:]
+
     def print_loaded_dbc_list(self):
         for each_dbc in self.dbc_list:
             print("Loaded DBC Path:", each_dbc.path, "\tX\tChannel:", each_dbc.channel)

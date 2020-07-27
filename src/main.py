@@ -41,8 +41,10 @@ class MainThread(threading.Thread):
                     print("MainThread: TEST")
                 if data == "load_dbc":
                     print("MainThread: LOAD DBC")
-                    for each_key in ui.source_dbc:
-                        message_manager.load_dbc(each_key, ui.source_dbc[each_key])
+                    message_manager.unload_dbc()
+                    for each_item in ui.source_dbc:
+                        for each_key in each_item.keys():
+                            message_manager.load_dbc(each_key, each_item[each_key])
                     message_manager.print_loaded_dbc_list()
             except:
                 count = 0
