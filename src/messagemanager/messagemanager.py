@@ -40,7 +40,8 @@ class MessageManager:
                         new_dbc_message_tx_message = self.new_dbc_and_tx_message(dbc, dbc_message, new_tx_message)
                         dbc_m_tx_m_list.append(new_dbc_message_tx_message)
 
-                        new_dbc_message_tx_message.set_signal_value(each_signal, tx_signals_from_ui_[each_signal])
+                        if tx_signals_from_ui_[each_signal] != "":
+                            new_dbc_message_tx_message.set_signal_value(each_signal, tx_signals_from_ui_[each_signal])
 
         return dbc_m_tx_m_list
 

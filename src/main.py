@@ -32,22 +32,31 @@ for each in ready_messages:
 
 
 class MainThread(threading.Thread):
+    ready_messages = []
+
     def run(self):
         print("main_thread_running")
         while True:
             try:
                 data = ui.q.get()
-                if data == "test":
-                    print("MainThread: TEST")
-                if data == "load_dbc":
-                    print("MainThread: LOAD DBC")
-                    message_manager.unload_dbc()
-                    for each_item in ui.source_dbc:
-                        for each_key in each_item.keys():
-                            message_manager.load_dbc(each_key, each_item[each_key])
-                    message_manager.print_loaded_dbc_list()
             except:
                 count = 0
+            if data == "test":
+                print("MainThread: TEST")
+            if data == "load_dbc":
+                print("MainThread: LOAD DBC")
+                message_manager.unload_dbc()
+                for each_item in ui.source_dbc:
+                    for each_key in each_item.keys():
+                        message_manager.load_dbc(each_key, each_item[each_key])
+                message_manager.print_loaded_dbc_list()
+            if data[0] == "add_signals":
+                self.ready_messages = message_manager.tx_message_ready_by_signal(ui.tx_signals_from_ui)
+                for each in self.ready_messages:
+                    print(each.tx_message.tx_message_name, each.tx_message.tx_message_id,
+                          each.tx_message.tx_signals)
+                    print("\t", each.tx_message.tx_message_signal_dict)
+                ui.tx_signals_from_ui.clear()
 
 
 main_thread = MainThread()

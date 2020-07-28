@@ -9,6 +9,8 @@ class UI():
         self.q = queue.Queue()
         self.source_dbc = []
         self.number_of_signals_ready = 0
+        self.tx_signals_from_ui = {}
+        self.ready_signals = []
 
 
 def open_dbc(channel):
@@ -72,7 +74,20 @@ def load_dbc():
         messagebox.showerror("No DBC File Added", "Please open DBC files first")
 
 
-def add_signal():
+def add_signals():
+    if entry_signal_name.get() != "":
+        if entry_signal_value.get() == "":
+            ui.tx_signals_from_ui[entry_signal_name.get()] = entry_signal_value.get()
+        else:
+            try:
+                ui.tx_signals_from_ui[entry_signal_name.get()] = int(entry_signal_value.get())
+            except:
+                messagebox.showerror("Wrong Value", "Signal Value has to be 'int' type of blank")
+    else:
+        messagebox.showerror("No Signal Name", "Please enter signal name")
+    ui.q.put(["add_signals"])
+    entry_signal_name.delete(0, "end")
+    entry_signal_value.delete(0, "end")
     temp_label = tk.Label(p1_f3, text='new')
     temp_label.grid(row=ui.number_of_signals_ready, column=0)
     ui.number_of_signals_ready = ui.number_of_signals_ready + 1
@@ -141,7 +156,7 @@ entry_signal_value.grid(row=0, column=3)
 blank_label_p1f2 = tk.Label(p1_f2, width=20)
 blank_label_p1f2.grid(row=0, column=4)
 
-btn_add_signal = tk.Button(p1_f2, text='Add Signal', width=10, command=lambda: add_signal())
+btn_add_signal = tk.Button(p1_f2, text='Add Signal', width=10, command=lambda: add_signals())
 btn_add_signal.grid(row=0, column=5, sticky='nsew')
 
 ################
