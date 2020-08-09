@@ -2,6 +2,22 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import threading
 import queue
+import sys
+import os
+
+
+# os.path.expanduser("~\Desktop") + "\\"
+
+# current_time = time.strftime('%Y%m%d%H%M%S', time.gmtime(int(each_device.shell("date +%s"))))
+# with open(file_save_path + "/screenshot_" + current_time + ".png", "wb") as fp:
+#     fp.write(result)
+
+# def resource_path(relative_path):
+#     """ Get absolute path to resource, works for dev and for PyInstaller """
+#     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+#     return os.path.join(base_path, relative_path)
+#
+# telematics_test_apk_path = resource_path('venv/Lib/external_apk/TelematicsTest.apk')
 
 
 class UI():
