@@ -30,19 +30,30 @@ class UI():
 
 
 def open_dbc(channel):
+    duplicated_flag = False
+
     if channel == 0:
-        file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title="Choose DBC for Channel 1", filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
-        for each in file:
-            temp = {each: 0}
-            ui.source_dbc.append(temp)
-            list_dbc_channel_1.insert(list_dbc_channel_1.size(), each)
+        filedialog_title = "Choose DBC for Channel 1"
+        target_list = list_dbc_channel_1
 
     if channel == 1:
-        file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title="Choose DBC for Channel 2", filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
-        for each in file:
-            temp = {each: 1}
+        filedialog_title = "Choose DBC for Channel 2"
+        target_list = list_dbc_channel_2
+
+    file = filedialog.askopenfilenames(initialdir="C:/Workstation/DB_CFG/", title=filedialog_title, filetypes=(("DBC files", "*.dbc"),("All files","*.*")))
+    for each in file:
+        temp = {each: channel}
+        for each_dict in ui.source_dbc:
+            if temp == each_dict:
+                duplicated_flag = True
+
+        if duplicated_flag == False:
             ui.source_dbc.append(temp)
-            list_dbc_channel_2.insert(list_dbc_channel_2.size(), each)
+            target_list.insert(target_list.size(), each)
+        elif duplicated_flag == True:
+            messagebox.showerror("Already Exist DBC", "\"" + each.split('/')[-1] + "\"" + " file already exists in the DBC list.")
+        duplicated_flag = False
+
     print(ui.source_dbc)
 
 
