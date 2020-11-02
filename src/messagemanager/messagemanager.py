@@ -43,7 +43,7 @@ class MessageManager:
                         if tx_signals_from_ui_[each_signal] != "":
                             new_dbc_message_tx_message.set_signal_value(each_signal, tx_signals_from_ui_[each_signal])
 
-        return dbc_m_tx_m_list
+        return self.dbc_and_tx_message_list
 
     def new_dbc_and_tx_message(self, dbc_, dbc_message_, new_tx_message_):
         new = DbcMessageTxMessage(dbc_, dbc_message_, new_tx_message_)
@@ -79,7 +79,11 @@ class DbcMessageTxMessage:
         self.tx_message.update_encoded_signals(encoded)
 
     def set_signal_value(self, signal_name_, signal_value_):
-        self.tx_message.tx_message_signal_dict[signal_name_] = signal_value_
+        found_signal_name = ""
+        for each in self.tx_message.tx_message_signal_dict:
+            if re.fullmatch(signal_name_, each, re.IGNORECASE):
+                found_signal_name = each
+        self.tx_message.tx_message_signal_dict[found_signal_name] = signal_value_
         self.encode_tx_signals()
 
 

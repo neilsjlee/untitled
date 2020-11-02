@@ -109,7 +109,7 @@ def add_signals():
             try:
                 ui.tx_signals_from_ui[entry_signal_name.get()] = int(entry_signal_value.get())
             except:
-                messagebox.showerror("Wrong Value", "Signal Value has to be 'int' type of blank")
+                messagebox.showerror("Wrong Value", "Signal Value has to be 'int' type or blank")
     else:
         messagebox.showerror("No Signal Name", "Please enter signal name")
     ui.q.put(["add_signals"])

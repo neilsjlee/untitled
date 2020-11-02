@@ -53,10 +53,13 @@ class MainThread(threading.Thread):
             if data[0] == "add_signals":
                 self.ready_messages = message_manager.tx_message_ready_by_signal(ui.tx_signals_from_ui)
                 for each in self.ready_messages:
-                    print(each.tx_message.tx_message_name, each.tx_message.tx_message_id,
-                          each.tx_message.tx_signals)
+                    print(each.tx_message.tx_message_name, each.tx_message.tx_message_id, each.tx_message.tx_signals)
                     print("\t", each.tx_message.tx_message_signal_dict)
+
                 ui.tx_signals_from_ui.clear()
+
+    # def pass_ready_signals_from_mmgr_to_ui(self):
+
 
 
 main_thread = MainThread()
